@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabrina Carpenter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      background: url('images/sabrina.jpg') no-repeat center center/cover;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .overlay {
+      background-color: rgba(255, 182, 193, 0.5);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    header, footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffddee;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 20px 100px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 40px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .song {
+      margin-bottom: 40px;
+    }
+
+    .song-title {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .song-controls button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .song-controls button:hover {
+      background-color: #ff3ea5;
+    }
+
+    .progress {
+      width: 300px;
+      height: 8px;
+      margin: 10px auto;
+      background-color: white;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #ff1493;
+      width: 0%;
+    }
+
+    .time {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sabrina.html">Sabrina</a>
+      <a href="olivia.html">Olivia</a>
+      <a href="taylor.html">Taylor</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <h1>Sabrina Carpenter</h1>
+    <div class="songs">
+      <div class="song">
+        <div class="song-title">Espresso</div>
+        <audio id="audio1" src="C:\Users\Admin\Downloads\espresso.mp3"></audio>
+        <div class="song-controls">
+          <button onclick="togglePlay(this, 'audio1')">Play</button>
+        </div>
+        <div class="progress" onclick="seek(event, 'audio1')">
+          <div id="progress1" class="progress-bar"></div>
+        </div>
+        <div class="time" id="time1">0:00</div>
+      </div>
+
+      <div class="song">
+        <div class="song-title">Juno</div>
+        <audio id="audio2" src="C:\Users\Admin\Downloads\juno.mp3"></audio>
+        <div class="song-controls">
+          <button onclick="togglePlay(this, 'audio2')">Play</button>
+        </div>
+        <div class="progress" onclick="seek(event, 'audio2')">
+          <div id="progress2" class="progress-bar"></div>
+        </div>
+        <div class="time" id="time2">0:00</div>
+      </div>
+
+      <div class="song">
+        <div class="song-title">Busy Woman</div>
+        <audio id="audio3" src="C:\Users\Admin\Downloads\busywoman.mp3"></audio>
+        <div class="song-controls">
+          <button onclick="togglePlay(this, 'audio3')">Play</button>
+        </div>
+        <div class="progress" onclick="seek(event, 'audio3')">
+          <div id="progress3" class="progress-bar"></div>
+        </div>
+        <div class="time" id="time3">0:00</div>
+      </div>
+
+      <div class="song">
+        <div class="song-title">Fifteen Minutes</div>
+        <audio id="audio4" src="C:\Users\Admin\Downloads\fifteenminutes.mp3"></audio>
+        <div class="song-controls">
+          <button onclick="togglePlay(this, 'audio4')">Play</button>
+        </div>
+        <div class="progress" onclick="seek(event, 'audio4')">
+          <div id="progress4" class="progress-bar"></div>
+        </div>
+        <div class="time" id="time4">0:00</div>
+      </div>
+
+      <div class="song">
+        <div class="song-title">Please Please Please</div>
+        <audio id="audio5" src="C:\Users\Admin\Downloads\pleasepleaseplease.mp3"></audio>
+        <div class="song-controls">
+          <button onclick="togglePlay(this, 'audio5')">Play</button>
+        </div>
+        <div class="progress" onclick="seek(event, 'audio5')">
+          <div id="progress5" class="progress-bar"></div>
+        </div>
+        <div class="time" id="time5">0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 SuperL Music Vibes</p>
+  </footer>
+
+  <script>
+    function togglePlay(button, audioId) {
+      const audio = document.getElementById(audioId);
+      const progress = document.getElementById('progress' + audioId.slice(-1));
+      const time = document.getElementById('time' + audioId.slice(-1));
+
+      if (audio.paused) {
+        document.querySelectorAll('audio').forEach(a => a.pause());
+        document.querySelectorAll('.song-controls button').forEach(b => b.textContent = 'Play');
+        audio.play();
+        button.textContent = 'Pause';
+      } else {
+        audio.pause();
+        button.textContent = 'Play';
+      }
+
+      audio.ontimeupdate = () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = percent + '%';
+        const minutes = Math.floor(audio.currentTime / 60);
+        const seconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+        time.textContent = `${minutes}:${seconds}`;
+      };
+    }
+
+    function seek(event, audioId) {
+      const audio = document.getElementById(audioId);
+      const progressBar = event.currentTarget;
+      const rect = progressBar.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const seekTime = (offsetX / rect.width) * audio.duration;
+      audio.currentTime = seekTime;
+    }
+  </script>
+</body>
+</html>
